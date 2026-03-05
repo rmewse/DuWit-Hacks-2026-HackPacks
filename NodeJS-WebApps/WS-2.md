@@ -58,3 +58,57 @@ It should be noted that a class can be used multiple times, but each id name sho
 - The `label` colour is nicer
 - The Submit button to have a different background colour of your choosing, and of course text colour to contrast
     - If you can, can you make the background colour change when you hover over it? You may need to Google this one.
+
+## Task 2.2 - Handling the Login Request
+
+Now that we have a form that sends data to `/login`, we need our server to actually **handle the POST request**.
+
+First, we need to tell Express to understand form data. Near the top of your `index.js`, after creating the app, add:
+
+```js
+app.use(express.urlencoded({ extended: true }));
+````
+
+This allows us to read the form data sent from the browser.
+
+Now, inside your request handler, add a new condition:
+
+```js
+if(path == "/login" && method == "POST"){
+    let username = req.body.username;
+    let password = req.body.password;
+
+    res.set("Content-Type","text/plain");
+    res
+        .status(200)
+        .send(`Hello ${username}, your login request was received!`);
+}
+```
+
+Here we extract the values from the form using `req.body`.
+
+## Exercise 2.2.1
+
+Try submitting the form on your webpage.
+
+If everything works correctly, you should see a page confirming the username you entered.
+
+Try submitting different usernames and see the response change.
+
+## Task 2.3 - Where Next?
+
+Congratulations — you now have a web app that can:
+
+* Serve HTML pages
+* Display images
+* Accept user input through forms
+* Process POST requests on the server
+
+In a real application, the next steps would include:
+
+* Storing user accounts in a database
+* Authenticating passwords securely
+* Allowing users to upload cat photos
+* Displaying user-submitted content
+
+But for now, you have built the foundations of a **real web application**. Give yourself a pat on the back!
